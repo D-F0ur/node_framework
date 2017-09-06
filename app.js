@@ -25,14 +25,14 @@ app.use(koaStatic(path.join(__dirname, '/static')))
 app.use(favicon(__dirname + '/static/assets/images/favicon.ico'))
 
 // 配置服务端模板渲染引擎中间件
-// app.use(views(path.join(__dirname, './views'), {
-//   extension: 'ejs'
-// }))
-render(app, {
-  root: path.join(__dirname, '/views'),
-  extname: '.html',
-  debug: process.env.NODE_ENV !== 'production'
-})
+app.use(views(path.join(__dirname, '/views'), {
+  extension: 'html'
+}))
+// render(app, {
+//   root: path.join(__dirname, '/views'),
+//   extname: '.html',
+//   debug: process.env.NODE_ENV !== 'production'
+// })
 
 // 初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods())

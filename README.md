@@ -53,7 +53,7 @@ npm run dev
     - 存储session登录态数据
 - 渲染
     - 服务端渲染：art-template作为服务端渲染的模板引擎，未来可能使用Vue-SSR
-    - 前端渲染：目前使用layui作为UI框架，未来使用Vue框架，webpack打包
+    - 前端渲染：目前使用Vue框架，搭配layui作为UI框架
 - Redis（后续考虑）
 - debugger（后续考虑）
 
