@@ -1,5 +1,6 @@
 const path = require('path')
 const Koa = require('koa')
+const favicon = require('koa-favicon')
 const views = require('koa-views')
 const koaStatic = require('koa-static')
 const koaLogger = require('koa-logger')
@@ -18,9 +19,10 @@ app.use(koaLogger())
 app.use(bodyParser())
 
 // 配置静态资源加载中间件
-app.use(koaStatic(
-  path.join(__dirname, '/static')
-))
+app.use(koaStatic(path.join(__dirname, '/static')))
+
+// 配置favicon
+app.use(favicon(__dirname + '/static/assets/images/favicon.ico'))
 
 // 配置服务端模板渲染引擎中间件
 // app.use(views(path.join(__dirname, './views'), {

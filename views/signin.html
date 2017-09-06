@@ -41,7 +41,42 @@
   </div>
   <div class="main">
     <div class="fly-panel fly-panel-user" pad20>
-      <h1>Hello World!</h1>
+      <div class="layui-tab layui-tab-brief" lay-filter="user">
+        <ul class="layui-tab-title">
+          <li class="layui-this">登录</li>
+          <li>
+            <a href="/user/reg">注册</a>
+          </li>
+        </ul>
+        <div class="layui-form layui-tab-content" style="padding: 20px 0">
+          <div class="layui-tab-item layui-show">
+            <div class="layui-form layui-form-pane">
+              <form class="" action="" method="post">
+                <div class="layui-form-item">
+                  <label class="layui-form-label">邮箱</label>
+                  <div class="layui-input-inline">
+                    <input type="text" name="email" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <label class="layui-form-label">密码</label>
+                  <div class="layui-input-inline">
+                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                  </div>
+                </div>
+                <div class="layui-form-item">
+                  <button class="layui-btn">立即登录</button>
+                </div>
+                <div class="layui-form-item fly-form-app">
+                  <span>或者使用社交账号登入</span>
+                  <a href="#" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+                  <a href="#" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
   <div class="footer">
@@ -55,14 +90,13 @@
       <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
     </p>
   </div>
-
   <script src="/assets/layui-2.1.2/layui.js"></script>
   <script>
-  layui.use([
-    'layer'
-  ], function() {
-    var layer = layui.layer
-  })
+    layui.use([
+      'layer'
+    ], function() {
+      var layer = layui.layer
+    })
   </script>
 </body>
 </html>
