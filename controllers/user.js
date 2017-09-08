@@ -71,7 +71,7 @@ module.exports = {
 
         let session = ctx.session
         session.isLogin = true
-        session.username = userResult.userName
+        session.username = userResult.username
         session.userId = userResult.id
 
       } else {
@@ -83,8 +83,31 @@ module.exports = {
       result.code = 5001
     }
 
-
     ctx.body = result
+  },
+
+  /**
+   * 登出操作
+   * @param  {object}  ctx 上下文对象
+   */
+  async logout(ctx) {
+    let result = {
+      message: '',
+      data: null,
+      code: ''
+    }
+
+    if(ctx.session && ctx.session.isLogin === true) {
+      ctx.session.isLogin = false
+      result.message = code[2000]
+      result.code = 2000
+      ctx.redirect('/user/login')
+    } else {
+      result.message = code[4000]
+      result.code = 4000
+      ctx.body = result
+    }
+
   },
 
   /**

@@ -23,10 +23,23 @@ const sessionMysqlConfig = {
   database: config.database.DATABASE
 }
 
+// 存放sessionId的cookie配置
+let cookie = {
+  maxAge: '', // cookie有效时长
+  expires: '',  // cookie失效时间
+  path: '', // 写cookie所在的路径
+  domain: '', // 写cookie所在的域名
+  httpOnly: '', // 是否只用于http请求中获取
+  overwrite: '',  // 是否允许重写
+  secure: '',
+  sameSite: '',
+  signed: '',
+}
 // 配置session中间件
 app.use(session({
   key: 'USER_SID',
   store: new MysqlStore(sessionMysqlConfig)
+  // cookie: cookie
 }))
 
 // 配置控制台日志中间件
