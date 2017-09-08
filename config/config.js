@@ -4,9 +4,9 @@ const config = {
   database: {
     HOST: 'localhost',
     PORT: '3306',
-    DATABASE: 'node-test',
+    DATABASE: 'node_test',
     USERNAME: 'root',
-    PASSWORD: 'C6w+%eX>Ied'
+    PASSWORD: '=C6w+%eX>Ied'
   }
 }
 

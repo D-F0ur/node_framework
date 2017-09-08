@@ -16,7 +16,7 @@
   <div id="app" v-cloak>
     <div class="header">
       <div class="main">
-        <a class="logo" href="/" title="Fly">Fly社区</a>
+        <a class="logo" href="/"></a>
         <div class="nav">
           <a href="#">
             <i class="iconfont icon-wenda"></i>交流
@@ -59,7 +59,7 @@
                   <div class="layui-form-item">
                     <label class="layui-form-label">邮箱</label>
                     <div class="layui-input-inline">
-                      <input type="text" name="email" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input" v-model="user.email">
+                      <input type="text" name="username" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input" v-model="user.username">
                     </div>
                   </div>
                   <div class="layui-form-item">
@@ -85,13 +85,8 @@
     </div>
     <div class="footer">
       <p>
-        <a href="http://fly.layui.com/">Fly社区</a> 2017 ©
-        <a href="http://www.layui.com/">layui.com</a>
-      </p>
-      <p>
-        <a href="http://fly.layui.com/jie/3147.html" target="_blank">产品授权</a>
-        <a href="http://fly.layui.com/jie/8157.html" target="_blank">获取Fly社区模版</a>
-        <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
+        <a href="/">后台管理系统</a> 2017 ©
+        <a href="http://www.jdoer.com/">jdoer.com</a>
       </p>
     </div>
   </div>
@@ -110,21 +105,22 @@
         el: '#app',
         data: {
           user: {
-            email: '',
+            username: '',
             password: ''
           }
         },
         methods: {
-          onClick_loginBtn(data) {
-            if(!this.user.email || !this.user.password) return
+          onClick_loginBtn() {
+            if(!this.user.username || !this.user.password) return
 
+            var _param = this.user
             $.ajax({
               url: '/api/user/signin',
               type: 'POST',
-              data: JSON.stringify(this.user),
+              data: _param,
               success: function(d) {
-                // if (d.code != 20000) return alertify.error('出错了：' + d.message);
-                // renderLoanList($('.pagination-wrap .page.active a').data('page'));
+                if (d.code != 2000) return layer.msg(d.message)
+                window.location.href = '/home'
               }
             })
           }

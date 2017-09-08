@@ -6,11 +6,28 @@ const koaStatic = require('koa-static')
 const koaLogger = require('koa-logger')
 const bodyParser = require('koa-bodyparser')
 const render = require('koa-art-template')
+const session = require('koa-session-minimal')
+const MysqlStore = require('koa-mysql-session')
 
-const config = require('./config')
+const config = require('./config/config')
 const routers = require('./routers/routers')
 
 const app = new Koa()
+
+// session存储配置
+const sessionMysqlConfig = {
+  host: config.database.HOST,
+  user: config.database.USERNAME,
+  port: config.database.PORT,
+  password: config.database.PASSWORD,
+  database: config.database.DATABASE
+}
+
+// 配置session中间件
+app.use(session({
+  key: 'USER_SID',
+  store: new MysqlStore(sessionMysqlConfig)
+}))
 
 // 配置控制台日志中间件
 app.use(koaLogger())
@@ -25,14 +42,14 @@ app.use(koaStatic(path.join(__dirname, '/static')))
 app.use(favicon(__dirname + '/static/assets/images/favicon.ico'))
 
 // 配置服务端模板渲染引擎中间件
-app.use(views(path.join(__dirname, '/views'), {
-  extension: 'html'
-}))
-// render(app, {
-//   root: path.join(__dirname, '/views'),
-//   extname: '.html',
-//   debug: process.env.NODE_ENV !== 'production'
-// })
+// app.use(views(path.join(__dirname, '/views'), {
+//   extension: 'ejs'
+// }))
+render(app, {
+  root: path.join(__dirname, '/views'),
+  extname: '.html',
+  debug: process.env.NODE_ENV !== 'production'
+})
 
 // 初始化路由中间件
 app.use(routers.routes()).use(routers.allowedMethods())

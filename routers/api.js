@@ -3,11 +3,16 @@
  */
 
 const router = require('koa-router')()
-const userInfoController = require('../controllers/user-info')
+const userController = require('../controllers/user')
 
-router.get('/user/info', userInfoController.getLoginUserInfo)
-router.post('/user/signin', userInfoController.signIn)
-router.post('/user/signup', userInfoController.signUp)
+// 获取用户信息
+router.get('/user/info', userController.getLoginUserInfo)
+// 判断用户是否登录
+router.get('/user/validate', userController.validateLogin)
+// 登录
+router.post('/user/signin', userController.signIn)
+// 注册
+router.post('/user/signup', userController.signUp)
 
 
 module.exports = router

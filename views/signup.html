@@ -7,108 +7,138 @@
   <link rel="stylesheet" href="/assets/layui-2.1.2/css/layui.css">
   <link rel="stylesheet" href="/assets/css/font.css">
   <link rel="stylesheet" href="/assets/css/global.css">
+  <style>
+    [v-cloak] { display: none }
+  </style>
 </head>
 
 <body>
-  <div class="header">
-    <div class="main">
-      <a class="logo" href="/" title="Fly">Fly社区</a>
-      <div class="nav">
-        <a href="#">
-          <i class="iconfont icon-wenda"></i>交流
-        </a>
-        <a href="#">
-          <i class="iconfont icon-iconmingxinganli" style="top: 2px"></i>案例
-        </a>
-        <a href="http://www.layui.com/">
-          <i class="iconfont icon-ui"></i>框架
-        </a>
-      </div>
-      <div class="nav-user">
-        <a class="unlogin" href="/user/login">
-          <i class="iconfont icon-touxiang"></i>
-        </a>
-        <span>
-          <a href="/user/login">登录</a>
-          <a href="/user/reg">注册</a>
-        </span>
-        <p class="out-login">
-          <a href="#" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
-          <a href="#" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
-        </p>
+  <div id="app" v-cloak>
+    <div class="header">
+      <div class="main">
+        <a class="logo" href="/"></a>
+        <div class="nav">
+          <a href="#">
+            <i class="iconfont icon-wenda"></i>交流
+          </a>
+          <a href="#">
+            <i class="iconfont icon-iconmingxinganli" style="top: 2px"></i>案例
+          </a>
+          <a href="http://www.layui.com/">
+            <i class="iconfont icon-ui"></i>框架
+          </a>
+        </div>
+        <div class="nav-user">
+          <a class="unlogin" href="/user/login">
+            <i class="iconfont icon-touxiang"></i>
+          </a>
+          <span>
+            <a href="/user/login">登录</a>
+            <a href="/user/reg">注册</a>
+          </span>
+          <p class="out-login">
+            <a href="#" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+            <a href="#" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="main">
-    <div class="fly-panel fly-panel-user" pad20>
-      <div class="layui-tab layui-tab-brief" lay-filter="user">
-        <ul class="layui-tab-title">
-          <li>
-            <a href="/user/login">登录</a>
-          </li>
-          <li class="layui-this">注册</li>
-        </ul>
-        <div class="layui-form layui-tab-content" style="padding: 20px 0">
-          <div class="layui-tab-item layui-show">
-            <div class="layui-form layui-form-pane">
-              <form class="" action="" method="post">
-                <div class="layui-form-item">
-                  <label class="layui-form-label">邮箱</label>
-                  <div class="layui-input-inline">
-                    <input type="text" name="email" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+    <div class="main">
+      <div class="fly-panel fly-panel-user" pad20>
+        <div class="layui-tab layui-tab-brief">
+          <ul class="layui-tab-title">
+            <li>
+              <a href="/user/login">登录</a>
+            </li>
+            <li class="layui-this">注册</li>
+          </ul>
+          <div class="layui-form layui-tab-content" style="padding: 20px 0">
+            <div class="layui-tab-item layui-show">
+              <div class="layui-form layui-form-pane">
+                <div class="wrap-form">
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">邮箱</label>
+                    <div class="layui-input-inline">
+                      <input type="text" name="username" required lay-verify="required" placeholder="请输入邮箱" autocomplete="off" class="layui-input" v-model="user.username">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">密码</label>
+                    <div class="layui-input-inline">
+                      <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input" v-model="user.password">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <label class="layui-form-label">确认密码</label>
+                    <div class="layui-input-inline">
+                      <input type="password" name="password" required lay-verify="required" placeholder="请再次输入密码" autocomplete="off" class="layui-input" v-model="user.confirmPassword">
+                    </div>
+                  </div>
+                  <div class="layui-form-item">
+                    <button class="layui-btn" lay-submit @click="onClick_regBtn">立即注册</button>
+                  </div>
+                  <div class="layui-form-item fly-form-app">
+                    <span>或者使用社交账号登入</span>
+                    <a href="#" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
+                    <a href="#" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
                   </div>
                 </div>
-                <div class="layui-form-item">
-                  <label class="layui-form-label">昵称</label>
-                  <div class="layui-input-inline">
-                    <input type="text" name="username" required lay-verify="required" placeholder="请输入昵称" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-form-item">
-                  <label class="layui-form-label">密码</label>
-                  <div class="layui-input-inline">
-                    <input type="password" name="password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-form-item">
-                  <label class="layui-form-label">确认密码</label>
-                  <div class="layui-input-inline">
-                    <input type="password" name="password" required lay-verify="required" placeholder="请再次输入密码" autocomplete="off" class="layui-input">
-                  </div>
-                </div>
-                <div class="layui-form-item">
-                  <button class="layui-btn">立即注册</button>
-                </div>
-                <div class="layui-form-item fly-form-app">
-                  <span>或者使用社交账号登入</span>
-                  <a href="#" onclick="layer.msg('正在通过QQ登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-qq" title="QQ登入"></a>
-                  <a href="#" onclick="layer.msg('正在通过微博登入', {icon:16, shade: 0.1, time:0})" class="iconfont icon-weibo" title="微博登入"></a>
-                </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  <div class="footer">
-    <p>
-      <a href="http://fly.layui.com/">Fly社区</a> 2017 ©
-      <a href="http://www.layui.com/">layui.com</a>
-    </p>
-    <p>
-      <a href="http://fly.layui.com/jie/3147.html" target="_blank">产品授权</a>
-      <a href="http://fly.layui.com/jie/8157.html" target="_blank">获取Fly社区模版</a>
-      <a href="http://fly.layui.com/jie/2461.html" target="_blank">微信公众号</a>
-    </p>
+    <div class="footer">
+      <p>
+        <a href="/">后台管理系统</a> 2017 ©
+        <a href="http://www.jdoer.com/">jdoer.com</a>
+      </p>
+    </div>
   </div>
   <script src="/assets/layui-2.1.2/layui.js"></script>
+  <script src="/assets/vue-2.4.2/vue.js"></script>
   <script>
     layui.use([
-      'layer'
+      'layer',
+      'form'
     ], function() {
-      var layer = layui.layer
+      var layer = layui.layer,
+          form = layui.form,
+          $ = layui.$
+
+      var app = new Vue({
+        el: '#app',
+        data: {
+          user: {
+            username: '',
+            password: '',
+            confirmPassword: ''
+          }
+        },
+        methods: {
+          onClick_regBtn() {
+            if(!this.user.username || !this.user.password || !this.user.confirmPassword) return
+            if(this.user.password !== this.user.confirmPassword) return layer.msg('两次密码不一致')
+
+            var _param = this.user
+            $.ajax({
+              url: '/api/user/signup',
+              type: 'POST',
+              data: _param,
+              success: function(d) {
+                if (d.code != 2000) return layer.msg(d.message)
+                layer.msg('注册成功')
+                setTimeout(function() {
+                  window.location.href = '/user/login'
+                }, 1000)
+              }
+            })
+          }
+        }
+      })
     })
+
   </script>
 </body>
 </html>
